@@ -10,7 +10,7 @@ namespace Cotizador.Api.Controllers
     {
         [HttpPost]
         [Route("Cotizador")]
-        public CotizadorDTO Calcular( DatosCotizadorDTO cotizadordto)
+        public async Task<IActionResult> Calcular([FromBody] DatosCotizadorDTO cotizadordto)
         {
             if (cotizadordto.Monto>=200 && cotizadordto.Monto<=100000)
             {
@@ -26,7 +26,7 @@ namespace Cotizador.Api.Controllers
                     MontoRecibir = montorecibir,
                     Msj = "No existe Error"
                 };
-                return cotizador;
+                return StatusCode(StatusCodes.Status200OK, cotizador);
             }
             else
             {
@@ -34,7 +34,7 @@ namespace Cotizador.Api.Controllers
                 {
                     Msj = "El monto ingresado es incorrecto"
                 };
-                return cotizador;
+                return StatusCode(StatusCodes.Status200OK, cotizador);
             }
             
         }
